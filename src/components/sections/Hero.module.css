@@ -1,0 +1,315 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--nav-h) + 56px) 0 72px;
+  overflow: hidden;
+}
+
+/* One quiet light source, not a gradient wallpaper. */
+.glow {
+  position: absolute;
+  inset: -20% -10% auto auto;
+  z-index: -1;
+  width: min(1100px, 90vw);
+  aspect-ratio: 1;
+  background:
+    radial-gradient(closest-side, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
+    radial-gradient(closest-side at 30% 70%, rgba(232, 210, 180, 0.35), transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+:global([data-theme="dark"]) .glow {
+  background:
+    radial-gradient(closest-side, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
+    radial-gradient(closest-side at 30% 70%, rgba(180, 150, 110, 0.12), transparent 70%);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+}
+
+.eyebrow {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-3);
+  margin-bottom: 22px;
+}
+
+.title {
+  font-size: clamp(48px, 7.2vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.title :global(.serif) {
+  font-size: 1.08em;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+.lead {
+  margin-top: 28px;
+  max-width: 30em;
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.ctas :global(.btn) {
+  min-height: 52px;
+  padding-inline: 26px;
+  font-size: 17px;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 40px;
+  margin: 56px 0 0;
+  padding: 24px 0 0;
+  list-style: none;
+  border-top: 0.5px solid var(--hairline-strong);
+}
+
+.facts li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.facts strong {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.facts span {
+  font-size: 14px;
+  color: var(--ink-3);
+}
+
+/* Visual */
+.visual {
+  position: relative;
+  justify-self: end;
+  width: 100%;
+  max-width: 520px;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg);
+  background: var(--surface-2);
+}
+
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 55%;
+  transform: scale(1.04);
+  animation: settle 1800ms var(--ease-out) both;
+}
+
+:global([data-theme="dark"]) .frame img {
+  filter: brightness(0.86) contrast(1.04);
+}
+
+@keyframes settle {
+  from {
+    transform: scale(1.12);
+  }
+}
+
+.chip {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px 12px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 1.25;
+  animation:
+    chip-in 900ms var(--ease-spring) both,
+    float 7s ease-in-out 1.2s infinite;
+}
+
+.chip strong {
+  display: block;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.chip small {
+  display: block;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+.chipTop {
+  top: 9%;
+  left: -14%;
+  animation-delay: 700ms, 1.6s;
+}
+
+.chipBottom {
+  bottom: 8%;
+  right: -8%;
+  animation-delay: 850ms, 2.4s;
+}
+
+.chipIcon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: linear-gradient(160deg, #5fc28a, #2f8f5b);
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.chipIconBlue {
+  background: linear-gradient(160deg, #8fb3f2, #2f63b8);
+}
+
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+/* Entrance */
+.enter {
+  animation: rise 1000ms var(--ease-spring) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.enterVisual {
+  animation: rise-visual 1300ms var(--ease-spring) 180ms both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+}
+
+@keyframes rise-visual {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+}
+
+@media (max-width: 1100px) {
+  .chipTop {
+    left: -6%;
+  }
+
+  .chipBottom {
+    right: -4%;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    padding-top: calc(var(--nav-h) + 48px);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .visual {
+    justify-self: stretch;
+    max-width: none;
+  }
+
+  .frame {
+    aspect-ratio: 4 / 3.6;
+  }
+
+  .chipTop {
+    left: 14px;
+    top: 14px;
+  }
+
+  .chipBottom {
+    right: 14px;
+    bottom: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .title {
+    font-size: clamp(42px, 12.4vw, 56px);
+  }
+
+  .ctas :global(.btn) {
+    flex: 1 1 100%;
+  }
+
+  .facts {
+    gap: 18px 28px;
+    margin-top: 40px;
+  }
+
+  .facts strong {
+    font-size: 19px;
+  }
+
+  .frame {
+    aspect-ratio: 4 / 4.6;
+    border-radius: var(--r-lg);
+  }
+
+  .chip {
+    padding: 9px 14px 9px 9px;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+
+  .chip small {
+    font-size: 12px;
+  }
+
+  .chipIcon {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+  }
+}

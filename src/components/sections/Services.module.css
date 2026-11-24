@@ -1,0 +1,444 @@
+.section {
+  padding: var(--section-y) 0;
+}
+
+.head {
+  max-width: 760px;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 600ms var(--ease-spring),
+    box-shadow 600ms var(--ease-spring);
+}
+
+.tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.media {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1100ms var(--ease-out);
+}
+
+.tile:hover .media img {
+  transform: scale(1.03);
+}
+
+:global([data-theme="dark"]) .media img {
+  filter: brightness(0.88);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: clamp(24px, 2.6vw, 36px);
+}
+
+.kicker {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.tileTitle {
+  margin-top: 6px;
+  font-size: clamp(26px, 2.4vw, 32px);
+  letter-spacing: -0.03em;
+}
+
+.tileText {
+  margin-top: 12px;
+  max-width: 36em;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.tileFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.duration {
+  font-size: 14px;
+  color: var(--ink-3);
+}
+
+.book {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.book svg {
+  transition: transform 380ms var(--ease-spring);
+}
+
+.book:hover svg {
+  transform: translateX(3px);
+}
+
+/* ---- Layout ---- */
+
+.aesthetic {
+  grid-column: span 7;
+}
+
+.aesthetic .media {
+  aspect-ratio: 16 / 9;
+}
+
+.whitening {
+  grid-column: span 5;
+}
+
+.whitening .media {
+  aspect-ratio: 16 / 11;
+}
+
+.general,
+.implant,
+.ortho {
+  grid-column: span 4;
+}
+
+.general .media {
+  aspect-ratio: 4 / 3;
+}
+
+.general .media img {
+  object-position: 50% 40%;
+}
+
+.hygiene {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  background: var(--bg-alt);
+  box-shadow: none;
+}
+
+/* ---- Whitening shade scale (glass over photo) ---- */
+
+.shades {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  padding: 12px 14px 10px;
+  border-radius: 18px;
+}
+
+.shadeRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 5px;
+}
+
+.shadeRow span:not(.shadeMarker) {
+  height: 22px;
+  border-radius: 7px 7px 10px 10px;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+}
+
+.shadeLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.shadeMarker {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: calc((100% - 35px) / 8 + 6px);
+  height: 28px;
+  border-radius: 9px;
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 1400ms var(--ease-spring);
+}
+
+.whitening:hover .shadeMarker,
+.whitening:focus-within .shadeMarker {
+  transform: translateX(calc((100% - 1px) * 7));
+}
+
+/* ---- Implant: dark typographic tile ---- */
+
+.implant {
+  background: #111113;
+  color: #f5f5f7;
+}
+
+:global([data-theme="dark"]) .implant {
+  background: #050506;
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.08);
+}
+
+.implant .kicker,
+.implant .duration {
+  color: #8e8e94;
+}
+
+.implant .tileText {
+  color: #c2c2c7;
+}
+
+.implant .book {
+  color: #98b8f3;
+}
+
+.implantVisual {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 210px;
+  padding: 28px clamp(24px, 2.6vw, 36px) 0;
+  overflow: hidden;
+}
+
+.bigNumber {
+  font-family: var(--font-display);
+  font-size: 120px;
+  font-weight: 600;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  background: linear-gradient(180deg, #ffffff 10%, rgba(255, 255, 255, 0.15));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  align-self: center;
+}
+
+.implantSvg {
+  width: 96px;
+  height: 150px;
+  margin-bottom: -18px;
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.implantSvg path:first-child {
+  fill: rgba(255, 255, 255, 0.92);
+  stroke: none;
+}
+
+.implantSvg path:not(:first-child) {
+  transition: stroke 300ms ease;
+  transition-delay: calc(var(--i) * 70ms);
+}
+
+.implant:hover .implantSvg path:not(:first-child) {
+  stroke: #98b8f3;
+}
+
+/* ---- Ortho: teeth line that straightens ---- */
+
+.orthoVisual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 210px;
+  background: linear-gradient(180deg, var(--accent-soft), transparent);
+}
+
+.orthoVisual span {
+  width: 18px;
+  height: 30px;
+  border-radius: 8px 8px 11px 11px;
+  background: var(--surface);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 6px 14px rgba(20, 30, 60, 0.1),
+    inset 0 0 0 0.5px var(--hairline);
+  transform: translateY(var(--o)) rotate(var(--r));
+  transition: transform 1100ms var(--ease-spring);
+}
+
+.orthoVisual span:nth-child(odd) {
+  transition-delay: 60ms;
+}
+
+:global([data-theme="dark"]) .orthoVisual span {
+  background: #e9e6e0;
+}
+
+.ortho:hover .orthoVisual span,
+.ortho:focus-within .orthoVisual span {
+  transform: none;
+}
+
+/* ---- Hygiene: wide tile ---- */
+
+.hygieneAside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  padding: clamp(24px, 2.6vw, 36px);
+  border-left: 0.5px solid var(--hairline-strong);
+}
+
+.bigWord {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(48px, 6vw, 84px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.bigWord span {
+  display: block;
+  margin-top: 12px;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  color: var(--ink-3);
+}
+
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 14px;
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 0.5px var(--hairline);
+}
+
+@media (max-width: 1024px) {
+  .aesthetic,
+  .whitening {
+    grid-column: span 12;
+  }
+
+  .whitening {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .whitening .media {
+    aspect-ratio: auto;
+    min-height: 320px;
+  }
+
+  .general,
+  .implant,
+  .ortho {
+    grid-column: span 6;
+  }
+
+  .ortho {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .orthoVisual {
+    height: auto;
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 700px) {
+  .bento {
+    gap: 14px;
+  }
+
+  .tile {
+    border-radius: var(--r-lg);
+  }
+
+  .general,
+  .implant,
+  .ortho,
+  .whitening,
+  .hygiene {
+    grid-column: span 12;
+  }
+
+  .whitening,
+  .ortho,
+  .hygiene {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .whitening .media {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+
+  .orthoVisual {
+    min-height: 0;
+    height: 170px;
+  }
+
+  .implantVisual {
+    height: 180px;
+  }
+
+  .bigNumber {
+    font-size: 100px;
+  }
+
+  .hygieneAside {
+    border-left: 0;
+    border-top: 0.5px solid var(--hairline-strong);
+  }
+}
